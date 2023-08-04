@@ -1,6 +1,7 @@
 package com.brkaksu.landmarkbookjava;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     ArrayList<Landmark> landmarkArrayList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
 
-        landmarkArrayList = new ArrayList<Landmark>();
+        landmarkArrayList = new ArrayList<>();
 
         Landmark pisa = new Landmark("Pisa", "Italy", R.drawable.pisa);
         Landmark eiffel = new Landmark("Eiffel", "France", R.drawable.eyfel);
@@ -39,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         landmarkArrayList.add(collessium);
         landmarkArrayList.add(bridge);
 
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LandmarkAdapter landmarkAdapter = new LandmarkAdapter(landmarkArrayList);
+        binding.recyclerView.setAdapter(landmarkAdapter);
+
+
+        /*
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,
                 landmarkArrayList.stream().map(landmark -> landmark.name).collect(Collectors.toList())
         );
@@ -53,5 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        */
     }
 }
